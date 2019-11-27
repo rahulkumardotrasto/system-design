@@ -1,4 +1,7 @@
 - Features scope
+* 		What is the goal of the system?
+* 		Who are the users of the system? What do they need it for? How are they going to use it?
+* 		What are the inputs and outputs of the system?
   user
     user pastes content and short url is generated.
     anonymous user can also use this feature.
@@ -10,6 +13,15 @@
     service has high availability.
   
 - Assumptions
+Do we want to discuss the end-to-end experience or just the API?
+What clients do we want to support (mobile, web, etc)?
+Do we require authentication? Analytics? Integrating with existing systems?
+
+What is the expected read-to-write ratio?
+How many concurrent requests should we expect?
+What’s the average expected response time?
+What’s the limit of the data we allow users to provide?
+
   traffic is not evenly distributed.
   pastes are plain text only.
   
@@ -40,6 +52,10 @@
   
   
   Scale the design
+What type of database would you use and why?
+What caching solutions are out there? Which would you choose and why?
+What frameworks can we use as infrastructure in your ecosystem of choice?
+
   processing and servers
   storage
   caching
