@@ -1,7 +1,8 @@
 - Features scope
-* 		What is the goal of the system?
-* 		Who are the users of the system? What do they need it for? How are they going to use it?
-* 		What are the inputs and outputs of the system?
+What is the goal of the system?
+Who are the users of the system? What do they need it for? How are they going to use it?
+What are the inputs and outputs of the system?
+
   user
     user pastes content and short url is generated.
     anonymous user can also use this feature.
@@ -11,12 +12,8 @@
     service tracks analytics of page views.
     service deletes expired url.
     service has high availability.
-  
+**********
 - Assumptions
-Do we want to discuss the end-to-end experience or just the API?
-What clients do we want to support (mobile, web, etc)?
-Do we require authentication? Analytics? Integrating with existing systems?
-
 What is the expected read-to-write ratio?
 How many concurrent requests should we expect?
 What’s the average expected response time?
@@ -30,7 +27,7 @@ What’s the limit of the data we allow users to provide?
   4 writes/sec
   40 read/sec
   
-- Calculate usage
+  Calculate usage
   content- 1 kb
   short link- 7 bytes
   expiration_length_in_minutes- 4 bytes
@@ -40,12 +37,22 @@ What’s the limit of the data we allow users to provide?
   
   12.7 gb of new paste content per month
   450 gb of new paste content per three yrs
-  
-  Create a high level design
-  https://sketchboard.me/
+ **********
+- Create a high level design
+Do we want to discuss the end-to-end experience or just the API?
+What clients do we want to support (mobile, web, etc)?
+Do we require authentication? Analytics? Integrating with existing systems?
+https://sketchboard.me/
   
   Design core components
-  
+  Component + specific APIs required for each of them.
+Object oriented design for functionalities.
+Map features to modules: One scenario for one module.
+Consider the relationships among modules:
+Certain functions must have unique instance (Singletons)
+Core object can be made up of many other objects (composition).
+One object is another object (inheritance)
+
 - API design
 - Pseudo code for specific components
 - Data model/schema
