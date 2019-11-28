@@ -1,0 +1,106 @@
+a) Features scope/Requirements and Goals of the System
+
+What is the goal of the system?
+Who are the users of the system? What do they need it for? How are they going to use it?
+What are the inputs and outputs of the system?
+
+1) Functional Requirements
+
+Users should be able to upload/download/view photos.
+Users can perform searches based on photo/video titles.
+Users can follow other users.
+The system should be able to generate and display a user’s News Feed consisting of top photos from all the people the user follows.
+
+2) Non-functional Requirements
+
+Our service needs to be highly available.
+The acceptable latency of the system is 200ms for News Feed generation.
+Consistency can take a hit (in the interest of availability), if a user doesn’t see a photo for a while; it should be fine.
+The system should be highly reliable; any uploaded photo or video should never be lost.
+
+**********
+b) Assumptions for Capacity Estimation and Constraints
+What is the expected read-to-write ratio?
+How many concurrent requests should we expect?
+What’s the average expected response time?
+What’s the limit of the data we allow users to provide?
+
+1) Let’s assume we have 500M total users.
+30 million active users per month, with 1M daily active users.
+2M new photos every day, 
+
+read to write ratio: 10:1
+  24 writes/sec
+  240 read/sec
+
+2) Calculate usage
+Average photo file size => 200KB
+Total space required for 1 day of photos
+2M * 200KB => 400 GB
+Total space required for 10 years:
+400GB * 365 (days a year) * 10 (years) ~= 1425TB
+
+**********
+c) Create a high/low level design
+Do we want to discuss the end-to-end experience or just the API?
+What clients do we want to support (mobile, web, etc)?
+Do we require authentication? Analytics? Integrating with existing systems?
+https://sketchboard.me/
+
+1) At a high-level, we need to support two scenarios, one to upload photos and the other to view/search photos.
+Our service would need some object storage servers to store photos and also some database servers to store metadata 
+information about the photos.
+
+2) Data model/schema
+On which field, we should index.
+
+User: Assuming each “int” and “dateTime” is four bytes, each row in the User’s table will be of 68 bytes:
+
+UserID (4 bytes) + Name (20 bytes) + Email (32 bytes) + DateOfBirth (4 bytes) + CreationDate (4 bytes) + LastLogin (4 bytes) = 68 bytes
+If we have 500 million users, we will need 32GB of total storage.
+
+500 million * 68 ~= 32GB
+Photo: Each row in Photo’s table will be of 284 bytes:
+
+PhotoID (4 bytes) + UserID (4 bytes) + PhotoPath (256 bytes) + PhotoLatitude (4 bytes) + PhotLongitude(4 bytes) + UserLatitude (4 bytes) + UserLongitude (4 bytes) + CreationDate (4 bytes) = 284 bytes
+If 2M new photos get uploaded every day, we will need 0.5GB of storage for one day:
+
+2M * 284 bytes ~= 0.5GB per day
+For 10 years we will need 1.88TB of storage.
+UserFollow: Each row in the UserFollow table will consist of 8 bytes. If we have 500 million users and on average each user follows 500 users. We would need 1.82TB of storage for the UserFollow table:
+
+500 million users * 500 followers * 8 bytes ~= 1.82TB
+Total space required for all tables for 10 years will be 3.7TB:
+
+32GB + 1.88TB + 1.82TB ~= 3.7TB
+
+3) Design core components
+Component + specific APIs required for each of them.
+Object oriented design for functionalities.
+Map features to modules: One scenario for one module.
+Consider the relationships among modules:
+Certain functions must have unique instance (Singletons)
+Core object can be made up of many other objects (composition).
+One object is another object (inheritance)
+  
+ **********
+d) Scale the design
+What type of database would you use and why?
+What caching solutions are out there? Which would you choose and why?
+What frameworks can we use as infrastructure in your ecosystem of choice?
+
+processing and servers
+storage
+caching
+concurrency and communication
+security
+load balancing and proxy
+CDN
+https://sketchboard.me/
+  
+ **********
+e) back of envelop
+10 million per month = 4 per sec
+100 million per month = 40 per sec
+1 billion per month = 400 per sec
+1 mb = 1000kb = 1000000byte
