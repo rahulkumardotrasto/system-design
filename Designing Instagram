@@ -1,3 +1,4 @@
+https://www.educative.io/courses/grokking-the-system-design-interview/m2yDVZnQ8lG
 a) Features scope/Requirements and Goals of the System
 
 What is the goal of the system?
@@ -97,6 +98,11 @@ security
 load balancing and proxy
 CDN
 https://sketchboard.me/
+
+1)Reliability and Redundancy
+2)Data Sharding
+
+
   
  **********
 e) back of envelop
