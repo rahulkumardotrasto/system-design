@@ -1,0 +1,89 @@
+https://github.com/donnemartin/system-design-primer/blob/master/solutions/system_design/scaling_aws/README.md
+a) Features scope/Requirements and Goals of the System
+
+What is the goal of the system?
+Who are the users of the system? What do they need it for? How are they going to use it?
+What are the inputs and outputs of the system?
+
+1) Functional Requirements
+
+User makes a read or write request
+Service does processing, stores user data, then returns the results
+
+2) Non-functional Requirements
+
+Service needs to evolve from serving a small amount of users to millions of users
+Discuss general scaling patterns as we evolve an architecture to handle a large number of users and requests
+Service has high availability
+
+**********
+b) Assumptions for Capacity Estimation and Constraints
+What is the expected read-to-write ratio?
+How many concurrent requests should we expect?
+What’s the average expected response time?
+What’s the limit of the data we allow users to provide?
+
+1) Traffic is not evenly distributed
+Need for relational data
+Scale from 1 user to tens of millions of users
+Denote increase of users as:
+Users+
+Users++
+Users+++
+...
+10 million users
+1 billion writes per month
+100 billion reads per month
+100:1 read to write ratio
+1 KB content per write
+
+2) Calculate usage
+1 TB of new content per month
+1 KB per write * 1 billion writes per month
+36 TB of new content in 3 years
+Assume most writes are from new content instead of updates to existing ones
+400 writes per second on average
+40,000 reads per second on average
+
+**********
+c) Create a high/low level design
+Do we want to discuss the end-to-end experience or just the API?
+What clients do we want to support (mobile, web, etc)?
+Do we require authentication? Analytics? Integrating with existing systems?
+https://sketchboard.me/
+
+1) At a high-level
+
+2) Data model/schema
+On which field, we should index.
+
+3) Design core components
+Component + specific APIs required for each of them.
+Object oriented design for functionalities.
+Map features to modules: One scenario for one module.
+Consider the relationships among modules:
+Certain functions must have unique instance (Singletons)
+Core object can be made up of many other objects (composition).
+One object is another object (inheritance)
+  
+ **********
+d) Scale the design
+What type of database would you use and why?
+What caching solutions are out there? Which would you choose and why?
+What frameworks can we use as infrastructure in your ecosystem of choice?
+
+processing and servers
+storage
+caching
+concurrency and communication
+security
+load balancing and proxy
+CDN
+https://sketchboard.me/
+
+ **********
+e) back of envelop
+10 million per month = 4 per sec
+100 million per month = 40 per sec
+1 billion per month = 400 per sec
+1 mb = 1000kb = 1000000byte
