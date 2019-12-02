@@ -1,0 +1,53 @@
+https://github.com/donnemartin/system-design-primer/tree/master/solutions/system_design/twitter
+What is the goal of the system?
+Who are the users of the system? What do they need it for?
+
+a) Features scope/Requirements and Goals of the System
+How are user going to use it?
+What are the inputs and outputs of the system?
+
+1) Functional Requirements
+
+2) Non-functional Requirements
+
+**********
+b) Assumptions for Capacity Estimation and Constraints
+How many concurrent requests should we expect?
+What’s the average expected response time?
+What is the expected read-to-write ratio?
+What’s the limit of the data we allow users to provide?
+
+**********
+c) Create a high level design
+
+**********
+d) Design core components
+Component + Data model/schema + specific APIs required for each of them.
+Object oriented design for functionalities.
+Map features to modules: One scenario for one module.
+Consider the relationships among modules:
+Certain functions must have unique instance (Singletons)
+Core object can be made up of many other objects (composition).
+One object is another object (inheritance)
+  
+ **********
+e) Scale the design
+What type of database would you use and why?
+What caching solutions are out there? Which would you choose and why?
+What frameworks can we use as infrastructure in your ecosystem of choice?
+
+processing and servers
+storage
+caching
+concurrency and communication
+security
+load balancing and proxy
+CDN
+https://sketchboard.me/
+
+ **********
+e) back of envelop
+10 million per month = 4 per sec
+100 million per month = 40 per sec
+1 billion per month = 400 per sec
+1 mb = 1000kb = 1000000byte
