@@ -1,0 +1,40 @@
+https://www.youtube.com/watch?v=Sta_3XZt6jI
+
+k8s - kubernetes
+
+mongodb - joins at application layer, not at db layer as data are partitioned on multiple servers
+
+two types of index in dynamodb: 
+global secondary index - GSi - this is for all the partitions
+local secondary index - LSi - this is for single partition
+
+HA- High Availability
+
+stateless servers - two or more servers can provide HA 
+statefull servers - master server can provide read/write, slave can provide read. Replication happens from master to secondary.
+
+Health checks - way for load balancer to ensure request handling servers are healthy
+
+DNS - Domain Name servers. In dns, we can provide ips of multiple load balances and maintian HA
+
+Metric to define load on server 
+RPS: requests per second
+TPS: transactions per second
+QPS: Queries per second
+
+Zookeeper is a centralized service for monitoring configuration information, naming, providing distributed synchronization and providing group service.
+
+Gossip protocal:  cluster nodes talk gossip with each otherto make each other aware of the current state.
+
+Paxos: Popular consensus protocol. The goal of the paxos algorithm is for some number of peers to reach aggrement on a value.
+
+New Relic: Metrics
+Pager Duty: managed aterting service
+
+Persistence TCP Connection: It is the idea of using single TCP connection to send and receive multiple  HTTP requests/responses.
+
+Long Polling
+
+JSON ,XML, Thrift/Protobuf
+
+
